@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\GetLatestWeatherJob;
+use App\Utils\GeocodeApiConnectionService;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
@@ -13,7 +16,29 @@ class DashboardController extends Controller
      */
     public function index()
     {
-      GetLatestWeatherJob::dispatch();
         return inertia('Dashboard');
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function getGeocodeList(Request $request): string {
+        $query = $request->input('query');
+
+        if (empty($query)) {
+            return response()->noContent();
+        }
+
+        $googleService = new GeocodeApiConnectionService($request->ip() , $query);
+        $result = "";
+
+        try {
+            $result = $googleService->send();
+        } catch (RequestException $e) {
+            Log::error('Google Service error' . $e);
+        }
+
+        return $result;
     }
 }

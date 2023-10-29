@@ -106,11 +106,20 @@ export default {
 
             }
             axios
-                .get(route("dashboard.city.store", {data: data}))
+                .post(route("cities.store", data))
                 .then(({data}) => {
-                    self.results = data.results ? data.results : [];
                     console.log(data)
-                });
+                    if(data.status === "SUCCESS"){
+                        this.$emit('onSuccessMessage', data.msg);
+                    } else {
+                        this.$emit('onErrorMessage', data.msg);
+                    }
+                }).catch(
+                function (error) {
+                    this.$emit('onErrorMessage', 'Error during city creatio');
+                    return Promise.reject(error)
+                }
+            );
         },
     },
 };

@@ -31,4 +31,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/geo-search', [DashboardController::class, 'getGeocodeList'])->name('dashboard.geo.search');
+
+    Route::resource('cities', \App\Http\Controllers\CityController::class);
 });

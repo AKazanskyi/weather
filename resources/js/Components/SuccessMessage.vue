@@ -1,26 +1,9 @@
 <template>
-    <div v-if="text" class="bg-green-200 text-green-800">
+    <div v-if="text" class="msg-container success txt-white mb-4">
         <slot :text="text">
-            <div class="flex max-w-7xl mx-auto">
-                <div
-                    class="
-                        py-6
-                        px-4
-                        sm:px-6
-                        lg:px-8
-                        font-semibold
-                        text-center
-                        w-full
-                    "
-                >
-                    {{ text }}
-                </div>
-
-                <div
-                    class="font-bold flex items-center cursor-pointer mr-6"
-                    @click="text = false"
-                >
-                    <i class="fal fa-times"></i>
+            <div class="d-flex">
+                <div class="d-flex justify-content-center align-items-center">
+                    <span class="icon-success me-3 txt-green ico"></span>{{ text }}
                 </div>
             </div>
         </slot>
@@ -31,6 +14,7 @@
 export default {
     props: {
         message: [String, Boolean],
+        timeout: [Number, Boolean]
     },
 
     data() {
@@ -47,5 +31,14 @@ export default {
             },
         },
     },
+
+    mounted() {
+        if(this.timeout){
+            let vc = this
+            setTimeout(() => {
+                vc.text = false;
+            }, vc.timeout);
+        }
+    }
 };
 </script>

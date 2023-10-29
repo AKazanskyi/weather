@@ -5,3 +5,20 @@
 [x-cloak] {
     display: none;
 }
+
+
+.msg-container {
+    border-radius: 5px;
+    padding: 15px;
+}
+.msg-container .ico {
+    font-size: 20px;
+}
+.msg-container.success {
+    border: 2px solid #28AD4D;
+    background: rgba(84, 182, 126, 0.15);
+}
+.msg-container.error {
+    border: 2px solid #F44343;
+    background: rgba(244, 67, 67, 0.15);
+}
