@@ -93,7 +93,6 @@ export default {
                 .get(route("dashboard.geo.search", {query: this.query}))
                 .then(({data}) => {
                     self.results = data.results ? data.results : [];
-                    console.log(data)
                 });
         }, 500),
 
@@ -108,7 +107,6 @@ export default {
             axios
                 .post(route("cities.store", data))
                 .then(({data}) => {
-                    console.log(data)
                     if(data.status === "SUCCESS"){
                         this.$emit('onSuccessMessage', data.msg);
                     } else {

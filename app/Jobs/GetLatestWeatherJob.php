@@ -2,6 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Models\City;
+use App\Utils\OpenWeatherMapConnectionService;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -27,5 +30,12 @@ class GetLatestWeatherJob implements ShouldQueue
      */
     public function handle(): void
     {
+        $cities = City::all();
+
+        foreach ($cities as $city){
+
+
+
+        }
     }
 }

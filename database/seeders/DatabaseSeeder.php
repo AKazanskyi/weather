@@ -20,12 +20,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Developer',
             'password' => bcrypt('test2023'),
         ]);
-//        Service::updateOrCreate([
-//            'email' => 'test@email.com',
-//        ], [
-//            'name' => 'Developer',
-//            'password' => bcrypt('test2023'),
-//        ]);
+        Service::updateOrCreate([
+            'name' => 'openweathermap',
+        ], []);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

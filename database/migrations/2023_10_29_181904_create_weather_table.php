@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->integer('uv');
-            $table->integer('temperature');
-            $table->integer('precipitation');
+            $table->float('uv');
+            $table->float('temperature');
+            $table->float('precipitation');
 
             $table->bigInteger('city_id')->unsigned();
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');

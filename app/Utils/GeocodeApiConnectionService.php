@@ -7,10 +7,6 @@ use Illuminate\Http\Client\PendingRequest;
 
 class GeocodeApiConnectionService
 {
-    /**
-     * @var PendingRequest
-     */
-    private PendingRequest $client;
     private string $baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
 
     /**
@@ -32,7 +28,7 @@ class GeocodeApiConnectionService
         $countryCode = empty($countryCode->country_code2) ? "" : $countryCode->country_code2;
         $address = urlencode($this->query) . ' '.$countryCode;
 
-        $url  = "https://maps.googleapis.com/maps/api/geocode/json?address=$address&key=$googleKey";
+        $url  = $this->baseUrl."?address=$address&key=$googleKey";
         $response = Http::get($url)->throw();
 
         return $response->body();

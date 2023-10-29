@@ -33,6 +33,9 @@ return [
 
     'google' => [
         'key' => env('GOOGLE_API_KEY')
+    ],
+    'openweathermap' => [
+        'key' => env('OPENWEATHERMAP_API_KEY')
     ]
 
 ];
