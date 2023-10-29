@@ -36,6 +36,9 @@ return [
     ],
     'openweathermap' => [
         'key' => env('OPENWEATHERMAP_API_KEY')
+    ],
+    'tomorrowio' => [
+        'key' => env('TOMORROWIO_KEY')
     ]
 
 ];

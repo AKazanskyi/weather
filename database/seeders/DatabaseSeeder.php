@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
         Service::updateOrCreate([
             'name' => 'openweathermap',
         ], []);
+        Service::updateOrCreate([
+            'name' => 'tommorowio',
+        ], []);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

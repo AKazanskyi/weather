@@ -6,9 +6,10 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Log;
 
-class OpenWeatherMapConnectionService
+class TomorrowioConnectionService
 {
-    private string $baseUrl = 'https://api.openweathermap.org/data/3.0/onecall';
+    private string $baseUrl = 'https://api.tomorrow.io/v4/weather/realtime';
+
 
     /**
      * Constructor
@@ -23,12 +24,9 @@ class OpenWeatherMapConnectionService
      */
     public function send(): object
     {
-        $apiKey = config('services.openweathermap.key');
+        $apiKey = config('services.tomorrowio.key');
 
-        $lat = round($this->lat, 2);
-        $lon = round($this->lng, 2);
-
-        $url  = $this->baseUrl."?lat=$lat&lon=$lon&exclude=hourly,daily&appid=$apiKey&units=metric";
+        $url  = $this->baseUrl."?location=$this->lat,$this->lng&apikey=$apiKey";
         $response = Http::get($url)->throw();
 
         return json_decode($response->body());
