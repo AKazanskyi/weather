@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\GetLatestWeatherJob;
-use App\Models\City;
-use App\Models\Weather;
 use App\Utils\GeocodeApiConnectionService;
-use App\Utils\OpenWeatherMapConnectionService;
-use App\Utils\TomorrowioConnectionService;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;

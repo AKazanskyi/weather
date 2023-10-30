@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Service;
+use App\Models\Setting;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +21,19 @@ class DatabaseSeeder extends Seeder
         ], [
             'name' => 'Developer',
             'password' => bcrypt('test2023'),
+        ]);
+        User::updateOrCreate([
+            'email' => 'test1@email.com',
+        ], [
+            'name' => 'Developer',
+            'password' => bcrypt('test2023'),
+        ]);
+        Setting::updateOrCreate([
+            'user_id' => 1,
+        ], [
+            'pause_until' => Carbon::now()->addDay(),
+            'max_uv' => 7,
+            'max_pr' => 7
         ]);
         Service::updateOrCreate([
             'name' => 'openweathermap',
