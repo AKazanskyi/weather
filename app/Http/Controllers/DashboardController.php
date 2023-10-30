@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Utils\GeocodeApiConnectionService;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
@@ -15,7 +17,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return inertia('Dashboard');
+        $user = Auth::user();
+        $cities = $user->cities->pluck('id')->toArray();
+        $cities = City::whereIn('id', $cities)->has('weather')->with('weather')->get();
+
+        return inertia('Dashboard', compact('cities'));
     }
 
     /**

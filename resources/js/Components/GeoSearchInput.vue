@@ -98,6 +98,7 @@ export default {
 
         setSearchTerm(result) {
 
+            const vc = this
             const data = {
                 lat: result.geometry.location.lat,
                 lng: result.geometry.location.lng,
@@ -112,6 +113,7 @@ export default {
                     } else {
                         this.$emit('onErrorMessage', data.msg);
                     }
+                    vc.results = []
                 }).catch(
                 function (error) {
                     this.$emit('onErrorMessage', 'Error during city creatio');

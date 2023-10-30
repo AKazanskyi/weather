@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel
         // adding limitation for API usage
         $schedule
             ->command('app:average-weather-calculation')
-            ->hourly()
+            ->everyMinute()
             ->between('6:00', '20:00');
 
         $schedule

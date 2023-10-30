@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCityRequest;
+use App\Jobs\OpenWeatherMapRequestJob;
+use App\Jobs\TomorrowIoRequestJob;
 use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +47,12 @@ class CityController extends Controller
         if ($user && $city && !$city->users->contains($user)) {
             $city->users()->save($user);
         }
-        return response()->json(['status' => 'SUCCESS', 'data' => $city, 'msg' => 'City has been created']);
+
+        //Update weather immediately
+        OpenWeatherMapRequestJob::dispatch($city);
+        TomorrowIoRequestJob::dispatch($city);
+
+        return response()->json(['status' => 'SUCCESS', 'data' => $city, 'msg' => 'City has been created. Updating weather info... Please wait']);
     }
 
     /**
@@ -77,6 +84,21 @@ class CityController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $user = Auth::user();
+        $city = City::find($id);
+
+        if(!$city){
+            return response()->json(['status' => 'ERROR', 'msg' => 'City not found']);
+        }
+
+        $city->users()->detach($user->id);
+
+        //delete city if it is not attached to any user
+        if($city->users->count() == 0){
+            $city->delete();
+        }
+
+        return response()->json(['status' => 'ERROR', 'msg' => 'City has been deleted']);
     }
 }
