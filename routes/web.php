@@ -36,4 +36,5 @@ Route::middleware([
     Route::get('/geo-search', [DashboardController::class, 'getGeocodeList'])->name('dashboard.geo.search');
 
     Route::resource('cities', \App\Http\Controllers\CityController::class);
+    Route::resource('settings', \App\Http\Controllers\WeatherSettingsController::class);
 });
