@@ -16,8 +16,8 @@ class City extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function weathers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function weather(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasMany(AverageWeather::class);
+        return $this->hasOne(AverageWeather::class);
     }
 }

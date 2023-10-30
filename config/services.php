@@ -39,6 +39,10 @@ return [
     ],
     'tomorrowio' => [
         'key' => env('TOMORROWIO_KEY')
+    ],
+    'default_weather_limit' => [
+        'uv' => 7,
+        'precipitation' => 7,
     ]
 
 ];
